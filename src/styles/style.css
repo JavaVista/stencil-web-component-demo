@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Comic Neue", cursive;
+}
+
+:root {
+    --primary-color: #e23636;
+    --secondary-color: #f78f3f;
+    --tertiary-color: #171821;
+    --quaternary-color: #504a4a;
+    --quinary-color: #fff;
+    --senary-color: #518cca;
+    --septenary-color: #e57e38;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--tertiary-color);
+    width: 90%;
+    max-width: 500px;
+    padding: 3em 2em;
+    margin-top: 1em;
+    border-radius: 1em;
+}
+
