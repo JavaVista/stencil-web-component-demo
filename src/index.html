@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component</title>
 
-    <script type="module" src="/build/stencil-web-component.esm.js"></script>
-    <script nomodule src="/build/stencil-web-component.js"></script>
-    <link rel="stylesheet" href="/build/stencil-web-component.css" />
-  </head>
-  <body>
-    <main class="main-container">
-      <header><h1>Stencil Components</h1></header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component</title>
 
-    </main>
-  </body>
+  <script type="module" src="/build/stencil-web-component.esm.js"></script>
+  <script nomodule src="/build/stencil-web-component.js"></script>
+  <link rel="stylesheet" href="/build/stencil-web-component.css" />
+</head>
+
+<body>
+  <main class="main-container">
+    <header>
+      <h1>Stencil Components</h1>
+    </header>
+
+    <div class="container">
+
+      <!-- <my-component first="Stencil" middle="not a framework" last="but actually a compiler"></my-component> -->
+      <tooltip-stencil-component class="important" text="Search for a Marvel character and display details">Marvel
+        Character</tooltip-stencil-component>
+
+    </div>
+
+
+  </main>
+</body>
+
 </html>

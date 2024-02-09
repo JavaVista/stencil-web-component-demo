@@ -18,13 +18,13 @@
 }
 
 body {
-    background-color: var(--primary-color);
+    background-color: var(--septenary-color);
 }
 
 .main-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
 }
 
@@ -36,4 +36,3 @@ body {
     margin-top: 1em;
     border-radius: 1em;
 }
-
