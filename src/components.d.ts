@@ -5,7 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Character } from "./services/Character";
+export { Character } from "./services/Character";
 export namespace Components {
+    interface CharacterCardComponent {
+        "character"?: Character;
+        "setCharacter": (data: any) => Promise<void>;
+        "setError": (message: string) => Promise<void>;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -20,16 +27,86 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface SearchInputComponent {
+        "value": string;
+    }
+    interface SpinnerComponent {
+    }
+    interface StockFinderComponent {
+    }
+    interface StockPriceComponent {
+        "stockSymbol": string;
+    }
     interface TooltipStencilComponent {
         "text": string;
     }
 }
+export interface SearchInputComponentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchInputComponentElement;
+}
+export interface StockFinderComponentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLStockFinderComponentElement;
+}
 declare global {
+    interface HTMLCharacterCardComponentElement extends Components.CharacterCardComponent, HTMLStencilElement {
+    }
+    var HTMLCharacterCardComponentElement: {
+        prototype: HTMLCharacterCardComponentElement;
+        new (): HTMLCharacterCardComponentElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLSearchInputComponentElementEventMap {
+        "search": string;
+    }
+    interface HTMLSearchInputComponentElement extends Components.SearchInputComponent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchInputComponentElementEventMap>(type: K, listener: (this: HTMLSearchInputComponentElement, ev: SearchInputComponentCustomEvent<HTMLSearchInputComponentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchInputComponentElementEventMap>(type: K, listener: (this: HTMLSearchInputComponentElement, ev: SearchInputComponentCustomEvent<HTMLSearchInputComponentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSearchInputComponentElement: {
+        prototype: HTMLSearchInputComponentElement;
+        new (): HTMLSearchInputComponentElement;
+    };
+    interface HTMLSpinnerComponentElement extends Components.SpinnerComponent, HTMLStencilElement {
+    }
+    var HTMLSpinnerComponentElement: {
+        prototype: HTMLSpinnerComponentElement;
+        new (): HTMLSpinnerComponentElement;
+    };
+    interface HTMLStockFinderComponentElementEventMap {
+        "stockSelected": string;
+    }
+    interface HTMLStockFinderComponentElement extends Components.StockFinderComponent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLStockFinderComponentElementEventMap>(type: K, listener: (this: HTMLStockFinderComponentElement, ev: StockFinderComponentCustomEvent<HTMLStockFinderComponentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLStockFinderComponentElementEventMap>(type: K, listener: (this: HTMLStockFinderComponentElement, ev: StockFinderComponentCustomEvent<HTMLStockFinderComponentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLStockFinderComponentElement: {
+        prototype: HTMLStockFinderComponentElement;
+        new (): HTMLStockFinderComponentElement;
+    };
+    interface HTMLStockPriceComponentElement extends Components.StockPriceComponent, HTMLStencilElement {
+    }
+    var HTMLStockPriceComponentElement: {
+        prototype: HTMLStockPriceComponentElement;
+        new (): HTMLStockPriceComponentElement;
     };
     interface HTMLTooltipStencilComponentElement extends Components.TooltipStencilComponent, HTMLStencilElement {
     }
@@ -38,11 +115,19 @@ declare global {
         new (): HTMLTooltipStencilComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "character-card-component": HTMLCharacterCardComponentElement;
         "my-component": HTMLMyComponentElement;
+        "search-input-component": HTMLSearchInputComponentElement;
+        "spinner-component": HTMLSpinnerComponentElement;
+        "stock-finder-component": HTMLStockFinderComponentElement;
+        "stock-price-component": HTMLStockPriceComponentElement;
         "tooltip-stencil-component": HTMLTooltipStencilComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface CharacterCardComponent {
+        "character"?: Character;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -57,11 +142,28 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface SearchInputComponent {
+        "onSearch"?: (event: SearchInputComponentCustomEvent<string>) => void;
+        "value"?: string;
+    }
+    interface SpinnerComponent {
+    }
+    interface StockFinderComponent {
+        "onStockSelected"?: (event: StockFinderComponentCustomEvent<string>) => void;
+    }
+    interface StockPriceComponent {
+        "stockSymbol"?: string;
+    }
     interface TooltipStencilComponent {
         "text"?: string;
     }
     interface IntrinsicElements {
+        "character-card-component": CharacterCardComponent;
         "my-component": MyComponent;
+        "search-input-component": SearchInputComponent;
+        "spinner-component": SpinnerComponent;
+        "stock-finder-component": StockFinderComponent;
+        "stock-price-component": StockPriceComponent;
         "tooltip-stencil-component": TooltipStencilComponent;
     }
 }
@@ -69,7 +171,12 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "character-card-component": LocalJSX.CharacterCardComponent & JSXBase.HTMLAttributes<HTMLCharacterCardComponentElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "search-input-component": LocalJSX.SearchInputComponent & JSXBase.HTMLAttributes<HTMLSearchInputComponentElement>;
+            "spinner-component": LocalJSX.SpinnerComponent & JSXBase.HTMLAttributes<HTMLSpinnerComponentElement>;
+            "stock-finder-component": LocalJSX.StockFinderComponent & JSXBase.HTMLAttributes<HTMLStockFinderComponentElement>;
+            "stock-price-component": LocalJSX.StockPriceComponent & JSXBase.HTMLAttributes<HTMLStockPriceComponentElement>;
             "tooltip-stencil-component": LocalJSX.TooltipStencilComponent & JSXBase.HTMLAttributes<HTMLTooltipStencilComponentElement>;
         }
     }

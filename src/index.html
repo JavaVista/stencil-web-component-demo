@@ -20,11 +20,30 @@
     <div class="container">
 
       <!-- <my-component first="Stencil" middle="not a framework" last="but actually a compiler"></my-component> -->
-      <tooltip-stencil-component class="important" text="Search for a Marvel character and display details">Marvel
+
+      <tooltip-stencil-component class="tooltip-wrapper" text="Search for a Marvel character and display details">Marvel
         Character</tooltip-stencil-component>
+
+      <!-- Marvel Character Search Components -->
+      <search-input-component class="search-input-wrapper" value="Iron Man"></search-input-component>
+
+      <character-card-component class="character-card-wrapper"></character-card-component>
+
+      <!-- Alpha Vantage Stock Price Components -->
+      <stock-price-component class="stock-wrapper" stock-symbol="MSFT"></stock-price-component>
+
+      <stock-finder-component class="stock-wrapper"></stock-finder-component>
+
 
     </div>
 
+    <!-- 
+    An event listener to the 'stock-finder-component' custom element. The event listener listens for the 'stockSelected' event. When the 'stockSelected' event is fired.
+    -->
+    <script>
+      const stockFinderEl = document.querySelector('stock-finder-component');
+      stockFinderEl.addEventListener('stockSelected', event => console.log(event));
+    </script>
 
   </main>
 </body>

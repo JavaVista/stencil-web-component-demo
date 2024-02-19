@@ -1,0 +1,85 @@
+:host {
+  display: block;
+}
+
+:host(.stock-wrapper) {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif !important;
+  color: var(--quinary-color);
+  border: 0.5em solid var(--primary-color);
+  border-radius: 1em;
+  margin: 1.5em !important;
+  padding: 1em !important;
+  width: 20em;
+  max-width: 100%;
+}
+
+:host(.error) {
+  border: 0.5em solid var(--secondary-color);
+}
+
+form input {
+  font: inherit;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  width: 15em;
+  margin-bottom: 0.5em;
+}
+
+form input:focus {
+  outline: 0.125em solid var(--primary-color);
+}
+
+form button {
+  background-color: var(--senary-color);
+  color: var(--quinary-color);
+  font: inherit;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+form button:hover,
+form button:active {
+  outline: 0.125em solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--quinary-color);
+}
+
+form button:disabled {
+  background-color: var(--quaternary-color);
+  color: var(--senary-color);
+  cursor: not-allowed;
+}
+
+ul {
+  list-style: none;
+  margin: 1em 0 1em 0;
+  padding: 0;
+}
+
+li {
+  margin: 0.5em 0.5em 0.5em 0;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: var(--senary-color);
+  color: var(--quinary-color);
+}
+
+li:hover,
+li:active {
+  background-color: var(--secondary-color);
+  color: var(--quinary-color);
+  cursor: pointer;
+}
+
+.error-text {
+  color: var(--primary-color);
+}
+
+.success-text {
+  color: var(--senary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
