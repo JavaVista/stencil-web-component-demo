@@ -13,7 +13,7 @@ export class CharacterCardComponent {
 
   // Set character data and clear previous error
   @Method()
-  async setCharacter(data) {
+  async setCharacter(data: Character) {
     if (data) {
       this.character = data;
       this.error = null;
