@@ -6,7 +6,7 @@ This project is a demonstration of web components, presented at the Orlando Code
 
 ![Web Components](/stencil-web-components-demo.jpg)
 
-Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
+Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/stencil-community/stencil-app-starter) instead.
 
 ## Getting Started
 
