@@ -1,7 +1,8 @@
-import { MARVEL_API } from '../services/api-service';
+import { ApiService } from '../services/ApiService';
+//import { MARVEL_API } from '../services/api-service';
 
 let searchInitiated = false;
-
+let apiService: ApiService;
 
 customElements.whenDefined('search-input-component').then(() => {
     const searchInput = document.querySelector('search-input-component');
@@ -14,7 +15,7 @@ customElements.whenDefined('search-input-component').then(() => {
         searchInitiated = true;
         const searchTerm = event.detail;
         try {
-            const jsonData = await MARVEL_API.fetchCharacter(searchTerm);
+            const jsonData = await apiService.fetchCharacter(searchTerm);
             if (!jsonData || !jsonData.data || !jsonData.data.results) {
                 throw new Error('Invalid API response');
             }

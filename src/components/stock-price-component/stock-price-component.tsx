@@ -1,5 +1,7 @@
 import { Component, State, h, Prop, Watch, Listen } from '@stencil/core';
-import { AV_KEY } from '../../services/api-service';
+//import { AV_KEY } from '../../services/api-service';//
+import { ApiService } from '../../services/ApiService';
+import { AV_API } from '../../../test_api_services/av-api-service';
 
 @Component({
   tag: 'stock-price-component',
@@ -7,6 +9,7 @@ import { AV_KEY } from '../../services/api-service';
   shadow: true,
 })
 export class StockPriceComponent {
+  @Prop() apiService?: ApiService;
   @Prop({ mutable: true, reflect: true }) stockSymbol: string;
   @State() stockPrice: number;
   @State() stockUserInput: string;
@@ -14,6 +17,14 @@ export class StockPriceComponent {
   @State() stockInputValid: boolean = false;
   @State() error: string;
   @State() loading = false;
+
+  // Temporary Initialization of apiService for Development Purposes
+  // TODO: Remove this when apiService is fully implemented
+  // remove the this.effectiveApiService from the calls and add this.apiService instead
+  private internalApiService: ApiService = AV_API;
+  get effectiveApiService(): ApiService {
+    return this.apiService || this.internalApiService;
+  }
 
   @Watch('stockSymbol')
   stockSymbolChanged(newValue: string, oldValue: string) {
@@ -41,6 +52,9 @@ export class StockPriceComponent {
   }
 
   componentWillLoad() {
+    if (!this.apiService) {
+      console.warn("Component requires 'apiService' prop to function correctly.");
+    }
     this.loading = true;
   }
   componentDidLoad() {
@@ -56,26 +70,18 @@ export class StockPriceComponent {
     }
   }
 
-  fetchStockPrice(stockSymbol: string) {
+  async fetchStockPrice(stockSymbol: string) {
     this.loading = true;
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${AV_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.Information && data.Information.includes('Thank you for using Alpha Vantage!')) {
-          throw new Error('API rate limit exceeded');
-        }
-        if (!data['Global Quote']['05. price']) {
-          throw new Error('Invalid symbol');
-        }
-        this.error = null;
-        this.stockPrice = +data['Global Quote']['05. price'];
-        this.loading = false;
-      })
-      .catch(err => {
-        this.error = err.message;
-        this.stockPrice = null;
-        this.loading = false;
-      });
+    try {
+      const data = await this.effectiveApiService.fetchStockData(stockSymbol);
+      this.error = null;
+      this.stockPrice = data.price;
+    } catch (error) {
+      this.error = error.message;
+      this.stockPrice = null;
+    } finally {
+      this.loading = false;
+    }
   }
 
   hostData() {

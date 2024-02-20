@@ -5,6 +5,13 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property     | Attribute | Description | Type         | Default     |
+| ------------ | --------- | ----------- | ------------ | ----------- |
+| `apiService` | --        |             | `ApiService` | `undefined` |
+
+
 ## Events
 
 | Event           | Description | Type                  |

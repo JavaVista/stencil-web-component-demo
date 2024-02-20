@@ -6,11 +6,13 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Character } from "./services/Character";
+import { ApiService } from "./services/ApiService";
 export { Character } from "./services/Character";
+export { ApiService } from "./services/ApiService";
 export namespace Components {
     interface CharacterCardComponent {
         "character"?: Character;
-        "setCharacter": (data: any) => Promise<void>;
+        "setCharacter": (data: Character) => Promise<void>;
         "setError": (message: string) => Promise<void>;
     }
     interface MyComponent {
@@ -28,13 +30,16 @@ export namespace Components {
         "middle": string;
     }
     interface SearchInputComponent {
+        "apiService"?: ApiService;
         "value": string;
     }
     interface SpinnerComponent {
     }
     interface StockFinderComponent {
+        "apiService"?: ApiService;
     }
     interface StockPriceComponent {
+        "apiService"?: ApiService;
         "stockSymbol": string;
     }
     interface TooltipStencilComponent {
@@ -143,15 +148,18 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface SearchInputComponent {
+        "apiService"?: ApiService;
         "onSearch"?: (event: SearchInputComponentCustomEvent<string>) => void;
         "value"?: string;
     }
     interface SpinnerComponent {
     }
     interface StockFinderComponent {
+        "apiService"?: ApiService;
         "onStockSelected"?: (event: StockFinderComponentCustomEvent<string>) => void;
     }
     interface StockPriceComponent {
+        "apiService"?: ApiService;
         "stockSymbol"?: string;
     }
     interface TooltipStencilComponent {

@@ -1,5 +1,7 @@
-import { Component, State, h, Event, EventEmitter } from '@stencil/core';
-import { AV_KEY } from '../../services/api-service';
+import { Component, State, h, Event, EventEmitter, Prop } from '@stencil/core';
+//import { AV_KEY } from '../../services/api-service';
+import { ApiService } from '../../services/ApiService';
+import { AV_API } from '../../../test_api_services/av-api-service';
 
 type Search = {
   symbol: string;
@@ -12,11 +14,20 @@ type Search = {
   shadow: true,
 })
 export class StockFinderComponent {
+  @Prop() apiService?: ApiService;
   @Event({ bubbles: true, composed: true }) stockSelected: EventEmitter<string>;
   @State() searchResults: Search[] = [];
   @State() error: string;
   @State() loading = false;
   @State() searchQuery: string = '';
+
+  // Temporary Initialization of apiService for Development Purposes
+  // TODO: Remove this when apiService is fully implemented
+  // remove the this.effectiveApiService from the calls and add this.apiService instead
+  private internalApiService: ApiService = AV_API;
+  get effectiveApiService(): ApiService {
+    return this.apiService || this.internalApiService;
+  }
 
   handleInput(event: Event) {
     this.searchQuery = (event.target as HTMLInputElement).value;
@@ -26,25 +37,20 @@ export class StockFinderComponent {
     event.preventDefault();
     const stockName = this.searchQuery;
     this.loading = true;
-    fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${stockName}&apikey=${AV_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data['Information'] && data['Information'].includes('Thank you for using Alpha Vantage!')) {
-          throw new Error('API rate limit exceeded');
-        }
-        if (!data['bestMatches']) {
-          throw new Error('No matches found');
-        }
-        this.searchResults = data['bestMatches'].map(match => ({ symbol: match['1. symbol'], name: match['2. name'] }));
-        this.error = null;
-        this.loading = false;
-      })
-      .catch(err => {
-        this.error = err.message;
-        this.searchResults = [];
-        this.loading = false;
-      });
-  }
+    
+    this.effectiveApiService.searchStocksData(stockName)
+        .then(matches => {
+            this.searchResults = matches;
+            this.error = null;
+        })
+        .catch(err => {
+            this.error = err.message;
+            this.searchResults = [];
+        })
+        .finally(() => {
+            this.loading = false;
+        });
+}
 
   onSelectStock(symbol: string) {
     this.stockSelected.emit(symbol);
