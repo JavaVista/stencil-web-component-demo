@@ -1,4 +1,3 @@
-// src/services/api-service.ts
 import md5 from 'md5';
 import { ApiService } from '../src/services/ApiService';
 
