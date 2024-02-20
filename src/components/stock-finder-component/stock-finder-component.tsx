@@ -1,7 +1,5 @@
 import { Component, State, h, Event, EventEmitter, Prop } from '@stencil/core';
-//import { AV_KEY } from '../../services/api-service';
 import { ApiService } from '../../services/ApiService';
-import { AV_API } from '../../../test_api_services/av-api-service';
 
 type Search = {
   symbol: string;
@@ -21,13 +19,6 @@ export class StockFinderComponent {
   @State() loading = false;
   @State() searchQuery: string = '';
 
-  // Temporary Initialization of apiService for Development Purposes
-  // TODO: Remove this when apiService is fully implemented
-  // remove the this.effectiveApiService from the calls and add this.apiService instead
-  private internalApiService: ApiService = AV_API;
-  get effectiveApiService(): ApiService {
-    return this.apiService || this.internalApiService;
-  }
 
   handleInput(event: Event) {
     this.searchQuery = (event.target as HTMLInputElement).value;
@@ -38,7 +29,7 @@ export class StockFinderComponent {
     const stockName = this.searchQuery;
     this.loading = true;
     
-    this.effectiveApiService.searchStocksData(stockName)
+    this.apiService.searchStocksData(stockName)
         .then(matches => {
             this.searchResults = matches;
             this.error = null;

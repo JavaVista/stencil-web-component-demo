@@ -1,7 +1,5 @@
 import { Component, State, h, Prop, Watch, Listen } from '@stencil/core';
-//import { AV_KEY } from '../../services/api-service';//
 import { ApiService } from '../../services/ApiService';
-import { AV_API } from '../../../test_api_services/av-api-service';
 
 @Component({
   tag: 'stock-price-component',
@@ -17,14 +15,6 @@ export class StockPriceComponent {
   @State() stockInputValid: boolean = false;
   @State() error: string;
   @State() loading = false;
-
-  // Temporary Initialization of apiService for Development Purposes
-  // TODO: Remove this when apiService is fully implemented
-  // remove the this.effectiveApiService from the calls and add this.apiService instead
-  private internalApiService: ApiService = AV_API;
-  get effectiveApiService(): ApiService {
-    return this.apiService || this.internalApiService;
-  }
 
   @Watch('stockSymbol')
   stockSymbolChanged(newValue: string, oldValue: string) {
@@ -73,7 +63,7 @@ export class StockPriceComponent {
   async fetchStockPrice(stockSymbol: string) {
     this.loading = true;
     try {
-      const data = await this.effectiveApiService.fetchStockData(stockSymbol);
+      const data = await this.apiService.fetchStockData(stockSymbol);
       this.error = null;
       this.stockPrice = data.price;
     } catch (error) {

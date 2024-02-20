@@ -100,6 +100,22 @@ The first step for all three of these strategies is to [publish to NPM](https://
 - Add an import to the npm packages `import my-component;`
 - Then you can use the element anywhere in your template, JSX, html etc
 
+### Using Components with API Service that are required
+
+`SearchInputComponent, StockPriceComponent & StockFinderComponent` requires an `apiService` prop that implements the `ApiService` interface. This service is responsible for making API calls to fetch character data.
+
+### Example
+
+```javascript
+import { MarvelApiService } from 'path/to/MarvelApiService';
+import 'path/to/search-input-component';
+
+const apiService = new MarvelApiService();
+
+<search-input-component apiService={apiService}></search-input-component>
+```
+
+
 ## Usage
 
 In the 'Stock Price' component, enter a stock symbol and click 'Get Price'. In the 'Stock Finder' component, enter the name of a stock and click 'Find Stock'. Then, select a stock from the list to display its price in the 'Stock Price' component. Additionally, you can enter a Marvel character's name in the search box and click the 'Submit' button. The application will then display information about the selected character. To search for a character, type the name in the input box and select a character from the autocomplete list. The details of the selected character will then be populated.
