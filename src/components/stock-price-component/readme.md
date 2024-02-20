@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property      | Attribute      | Description | Type     | Default     |
-| ------------- | -------------- | ----------- | -------- | ----------- |
-| `stockSymbol` | `stock-symbol` |             | `string` | `undefined` |
+| Property      | Attribute      | Description | Type         | Default     |
+| ------------- | -------------- | ----------- | ------------ | ----------- |
+| `apiService`  | --             |             | `ApiService` | `undefined` |
+| `stockSymbol` | `stock-symbol` |             | `string`     | `undefined` |
 
 
 ## Dependencies

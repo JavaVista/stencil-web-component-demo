@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default |
-| -------- | --------- | ----------- | -------- | ------- |
-| `value`  | `value`   |             | `string` | `''`    |
+| Property     | Attribute | Description | Type         | Default     |
+| ------------ | --------- | ----------- | ------------ | ----------- |
+| `apiService` | --        |             | `ApiService` | `undefined` |
+| `value`      | `value`   |             | `string`     | `''`        |
 
 
 ## Events

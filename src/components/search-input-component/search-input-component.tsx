@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, Listen, Prop, State, h } from '@stencil/core';
-import { MARVEL_API } from '../../services/api-service';
 import store from '../../services/store';
+import { ApiService } from '../../services/ApiService';
 
 @Component({
   tag: 'search-input-component',
@@ -8,6 +8,9 @@ import store from '../../services/store';
   shadow: true,
 })
 export class SearchInputComponent {
+  // apiService prop allows for dependency injection of a service implementing the ApiService interface
+  @Prop() apiService?: ApiService;
+
   @Prop() value: string = '';
   @State() autocompleteResults: any[] = [];
   @State() showAutocomplete: boolean = false;
@@ -15,6 +18,13 @@ export class SearchInputComponent {
   @Event({ bubbles: true, composed: true }) search: EventEmitter<string>;
 
   private searchInput!: HTMLInputElement;
+
+
+  componentWillLoad() {
+    if (!this.apiService) {
+      console.warn("Component requires 'apiService' prop to function correctly.");
+    }
+  }
 
   private async autocomplete() {
     const input = this.searchInput.value.trim();
@@ -24,7 +34,7 @@ export class SearchInputComponent {
     }
 
     try {
-      const jsonData = await MARVEL_API.fetchCharactersThatStartWith(input);
+      const jsonData = await this.apiService.fetchCharactersThatStartWith(input);
       if (!jsonData || !jsonData.data || !jsonData.data.results.length) {
         this.autocompleteResults = [{ name: 'No characters found' }];
         this.showAutocomplete = true;
@@ -51,7 +61,7 @@ export class SearchInputComponent {
 
   @Listen('search')
   async handleSearch(event: CustomEvent) {
-    const response = await MARVEL_API.fetchCharacter(event.detail);
+    const response = await this.apiService.fetchCharacter(event.detail);
     if (response.data && response.data.results && response.data.results.length > 0) {
       store.state.characterData = response.data.results[0];
     } else {
