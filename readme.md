@@ -128,3 +128,4 @@ This project is licensed under the MIT License.
 
 - Thanks to the [Orlando Code Camp](https://orlandocodecamp.com/) for the opportunity to present this project.
 - Thanks to Marvel for providing the API.
+- Thanks to Alpha Vantage for providing the API.

@@ -1,6 +1,6 @@
 {
   "name": "stencil-web-component-demo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stencil Web Component Demo",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
